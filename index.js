@@ -83,3 +83,25 @@ function searchStudentsName(name){
 }
 searchStudentsName("Henry");
 
+// A function that adds students to the array
+ function addStudents(id, name, age, course, level){
+    let found = false;
+    for(let i=0; i<students.length; i++){
+    if(id===students[i].id){
+        found = true;
+       
+        break;
+    }
+}
+         if(!found){students.push({id, name, age, course, level})
+         console.log("Student Added Successfully");
+        return students.length;
+    }else{
+            console.log("Student ID already exists")
+    }
+}
+
+ addStudents(10229, "Ama", 18, "Electrical Engineering", 100)
+ displayStudents();
+//displayLevel100();
+countStudents();
