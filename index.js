@@ -116,7 +116,28 @@ searchStudentsName("Henry");
     }
     
  }
- deleteStudent(10229);
+
+ // A function that modifies information of a student
+ function updateStudent(id, name, age, course, level){
+    let found= false;
+    for(let i=0; i<students.length; i++){
+        if(id===students[i].id){
+            found = true;
+            students[i].age= age;
+            students[i].course = course;
+            students[i].level= level;
+            students[i].name= name;
+
+            console.log("Student Information Updated Successfully");
+            break;
+        }
+    }
+    if(!found){
+        console.log("Student Not Found");
+    }
+ }
+
+ //deleteStudent(10229);
  //addStudents(10229, "Ama", 18, "Electrical Engineering", 100)
  //displayStudents();
 //displayLevel100();
