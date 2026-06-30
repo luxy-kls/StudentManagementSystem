@@ -101,7 +101,23 @@ searchStudentsName("Henry");
     }
 }
 
- addStudents(10229, "Ama", 18, "Electrical Engineering", 100)
- displayStudents();
+// A function that deletes a students from the array
+ function deleteStudent(id){
+    let found = false;
+    for(let i=0; i<students.length; i++){
+        if(id===students[i].id){
+            found = true;
+            students.splice(i, 1);
+            console.log("Student Deleted Successfully");
+            return students.length;
+        }
+    } if(!found){
+        console.log("Student Not Found");
+    }
+    
+ }
+ deleteStudent(10229);
+ //addStudents(10229, "Ama", 18, "Electrical Engineering", 100)
+ //displayStudents();
 //displayLevel100();
-countStudents();
+//countStudents();
