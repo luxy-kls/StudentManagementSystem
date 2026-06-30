@@ -69,12 +69,8 @@ function searchStudentsName(name){
         if(students[i].name===name){
             found = true;
             console.log("Student Found")
-    console.log(`ID: ${students[i].id}`);
-    console.log(`Name: ${students[i].name}`);
-    console.log(`Age: ${students[i].age}`);
-    console.log(`Course: ${students[i].course}`);
-    console.log(`Level: ${students[i].level}`);
-                break
+            displayStudents(students[i]);
+                break;
         }return found;
     }
           if(!found){
@@ -124,7 +120,7 @@ searchStudentsName("Henry");
         if(id===students[i].id){
             found = true;
             students[i].age= age;
-            students[i].course = course;
+            students[i].course= course;
             students[i].level= level;
             students[i].name= name;
 
