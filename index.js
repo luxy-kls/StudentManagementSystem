@@ -1,12 +1,20 @@
 //Base for a student manager system
-const students=[
-    {id:10221 , name:"Henry" ,age:19 ,course:"Mining and Mineral Engineering" , level:100 },
-    {id:10222 , name:"Joseph" ,age:20 ,course:"Natural Gas" , level:200 },
-    {id:10223 , name:"John" ,age:21 ,course:"Computer Engineering" , level:100 },
-    {id:10224 , name:"Thompson" ,age:18 ,course:"Petroleum Engineering" , level:200 },
-    {id:10225 , name:"Kelvin" ,age:20 ,course:"Computer Science" , level:100 },
-]
 
+// Retrieving data from json file.
+ const fs= require("fs");
+ const data= fs.readFileSync("students.json", "utf8")
+ console.log(typeof data);
+ let students = JSON.parse(data);
+
+
+ // A function that stores changes in students.json file
+function saveStudents(){
+    const data= JSON.stringify(students, null, 4);
+    fs.writeFileSync("students.json", data);    
+}
+
+
+// A function that displays the list of students 
 function displayStudents(){
     for(let i=0; i<students.length; i++){
     console.log(`ID: ${students[i].id}`);
@@ -35,9 +43,6 @@ function countStudents(){
     console.log(`Total Count ${students.length}`);
 }
 
-displayStudents();
-displayLevel100();
-countStudents();
 
 //A function that allows one to search for a student by ID
 function searchStudentsId(id){
@@ -60,7 +65,7 @@ function searchStudentsId(id){
         }
 }
 
-searchStudentsId(10224)
+//searchStudentsId(10224)
 
 //A function that allows a student to be searched by Name
 function searchStudentsName(name){
@@ -77,10 +82,9 @@ function searchStudentsName(name){
             console.log("Student Not Found");
         }
 }
-searchStudentsName("Henry");
 
 // A function that adds students to the array
- function addStudents(id, name, age, course, level){
+ function addStudent(id, name, age, course, level){
     let found = false;
     for(let i=0; i<students.length; i++){
     if(id===students[i].id){
@@ -91,10 +95,12 @@ searchStudentsName("Henry");
 }
          if(!found){students.push({id, name, age, course, level})
          console.log("Student Added Successfully");
-        return students.length;
-    }else{
+         saveStudents();
+
+        }else{
             console.log("Student ID already exists")
     }
+           return students.length;
 }
 
 // A function that deletes a students from the array
@@ -105,12 +111,12 @@ searchStudentsName("Henry");
             found = true;
             students.splice(i, 1);
             console.log("Student Deleted Successfully");
-            return students.length;
+            saveStudents();
         }
     } if(!found){
         console.log("Student Not Found");
     }
-    
+    return students.length;
  }
 
  // A function that modifies information of a student
@@ -123,7 +129,8 @@ searchStudentsName("Henry");
             students[i].course= course;
             students[i].level= level;
             students[i].name= name;
-
+            
+            saveStudents();
             console.log("Student Information Updated Successfully");
             break;
         }
@@ -131,10 +138,14 @@ searchStudentsName("Henry");
     if(!found){
         console.log("Student Not Found");
     }
+    
  }
 
- //deleteStudent(10229);
- //addStudents(10229, "Ama", 18, "Electrical Engineering", 100)
- //displayStudents();
-//displayLevel100();
-//countStudents();
+addStudent(
+    10226,
+    "Michael",
+    20,
+    "Mechanical Engineering",
+    100
+);
+console.log(students)
