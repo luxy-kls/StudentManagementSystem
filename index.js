@@ -3,7 +3,6 @@
 // Retrieving data from json file.
  const fs= require("fs");
  const data= fs.readFileSync("students.json", "utf8")
- console.log(typeof data);
  let students = JSON.parse(data);
 
 
@@ -31,11 +30,10 @@ function displayStudents(){
 
 // A funtion that loops through an array to produce the only level 100 students
 function displayLevel100(){
-    for(let i=0; i<students.length; i++){
-        if(students[i].level==100){
-            displayStudent(students[i]);
-        }
-    }
+    const level100Students = students.filter(student => student.level === 100)
+    level100Students.forEach(student => {
+         displayStudent(student);
+    });
 }
 
 // A function that counts the total number of students
@@ -69,20 +67,15 @@ function searchStudentsName(name){
 
 // A function that adds students to the array
  function addStudent(id, name, age, course, level){
-    let found = false;
-    for(let i=0; i<students.length; i++){
-    if(id===students[i].id){
-        found = true;
-       
-        break;
-    }
-}
-         if(!found){students.push({id, name, age, course, level})
-         console.log("Student Added Successfully");
+    const student = students.find(student => student.id === id);
+    if(student){
+          console.log("Student ID already exists");
+    }else{students.push({id, name, age, course, level})
          saveStudents();
-
-        }else{
-            console.log("Student ID already exists")
+         return {
+    success: true,
+    message: "Student Added Successfully"
+};
     }
            return students.length;
 }
@@ -117,3 +110,5 @@ function searchStudentsName(name){
     }
     
  }
+
+ displayStudents()
