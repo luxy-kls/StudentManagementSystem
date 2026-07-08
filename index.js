@@ -5,6 +5,13 @@
  const data= fs.readFileSync("students.json", "utf8")
  let students = JSON.parse(data);
 
+ //Receiving input from the console
+ const readline = require("readline");
+ const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+ });
+
 
  // A function that stores changes in students.json file
 function saveStudents(){
@@ -111,4 +118,44 @@ function searchStudentsName(name){
     
  }
 
- displayStudents()
+ //A function that displays the menu 
+ function showMenu(){
+console.log( `
+========================
+STUDENT MANAGER SYSTEM
+========================
+
+1. Display Students
+2. Search Student
+3. Add Student
+4. Update Student
+5. Delete Student
+6. Count Students
+7. Exit
+`);
+ }
+
+// A sub-menu for Display Students
+function displayMenu(){
+    console.log(`
+======== DISPLAY MENU ========
+
+1. All Students
+2. Level 100
+3. Level 200
+4. Back
+5. Exit
+`);
+}
+
+// A sub-menu for Search Students
+function searchMenu(){
+    console.log(`
+======== SEARCH MENU ========
+
+1. Search By ID
+2. Search By Name
+3. Back
+4. Exit
+`);
+}
