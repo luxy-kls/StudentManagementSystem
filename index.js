@@ -1,7 +1,8 @@
 //Base for a student manager system
 
 // Retrieving data from json file.
- const fs= require("fs");
+ const { count } = require("console");
+const fs= require("fs");
  const data= fs.readFileSync("students.json", "utf8")
  let students = JSON.parse(data);
 
@@ -159,3 +160,43 @@ function searchMenu(){
 4. Exit
 `);
 }
+
+// Handles user's choice from the main menu
+function handleMainMenu(choice){
+    switch(choice){
+        case 1:
+            displayMenu();
+            break;
+        case 2:
+            searchMenu();
+            break;
+        case 3:
+            console.log("Add Student");
+            break;
+        case 4:
+            console.log("Update Students");
+            break;
+        case 5:
+            console.log("Delete Student");
+            break;
+        case 6:
+            countStudents();
+            break;
+        case 7:
+            console.log("Goodbye!");
+            break
+        default :
+        console.log("Invalid Option");
+    }
+}
+
+// The interactive section of the code
+showMenu();
+rl.question("What is your option? ", function(choice){
+    //converting the input to a number
+    choice = Number(choice);
+
+    //Inserting it into the menu handler
+    handleMainMenu(choice);
+rl.close();
+})
