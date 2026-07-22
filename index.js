@@ -44,6 +44,14 @@ function displayLevel100(){
     });
 }
 
+// A funtion that loops through an array to produce the only level 100 students
+function displayLevel200(){
+    const level200Students = students.filter(student => student.level === 200)
+    level200Students.forEach(student => {
+         displayStudent(student);
+    });
+}
+
 // A function that counts the total number of students
 function countStudents(){
     console.log(`Total Count ${students.length}`);
@@ -165,7 +173,7 @@ function searchMenu(){
 function handleMainMenu(choice){
     switch(choice){
         case 1:
-            displayMenu();
+            displayMenu()
             break;
         case 2:
             searchMenu();
@@ -184,13 +192,37 @@ function handleMainMenu(choice){
             break;
         case 7:
             console.log("Goodbye!");
-            break
+            break;
         default :
         console.log("Invalid Option");
     }
 }
 
-// The interactive section of the code
+// Handles user's choice from the display menu
+function handleDisplayMenu(choice){
+    switch(choice){
+        case 1:
+            displayStudents();
+            rl.close();
+            break ;
+        case 2:
+            displayLevel100();
+            rl.close();
+            break;
+        case 3:
+           displayLevel200();
+           rl.close();
+            break;
+        case 4:
+            startApplication();
+            break;
+        case 5:
+           return rl.close();
+        default :
+        console.log("Invalid Option");
+        }}
+// The interactive section of the code`
+function startApplication(){
 showMenu();
 rl.question("What is your option? ", function(choice){
     //converting the input to a number
@@ -198,5 +230,20 @@ rl.question("What is your option? ", function(choice){
 
     //Inserting it into the menu handler
     handleMainMenu(choice);
-rl.close();
+
+ if(choice===7){
+    return rl.close();
+ }  else if(choice ===1){
+    return startDisplayMenu();
+ }  
+    startApplication();
 })
+}
+
+function startDisplayMenu(){ 
+    rl.question("What is your next option?", function(choice){
+        choice = Number(choice);
+        handleDisplayMenu(choice);
+    })
+}
+startApplication();
